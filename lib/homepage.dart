@@ -1,13 +1,12 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'dart:html';
-
+// ignore_for_file: prefer_const_constructors, prefer_final_fields
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:test/screens/home.dart';
 import 'package:test/screens/map.dart';
 import 'package:test/screens/notifications.dart';
 import 'package:test/screens/settings.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,25 +15,27 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 class _HomePageState extends State<HomePage> { 
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomeScreen(),
+    MapScreen(),
+    NotificationsScreen(),
+    SettingsScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(10),
-            topLeft: Radius.circular(10),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.8),
-              spreadRadius: 4,
-              blurRadius: 10,
-              offset: Offset(0, 3),
-            ),
-
-          ],
+          color: Colors.grey.shade300,
+          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 4,
+          blurRadius: 9,
+          offset: Offset(0, 3) )]
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -42,12 +43,14 @@ class _HomePageState extends State<HomePage> {
             vertical: 15.0,
             ),
           child: GNav(
+            duration: Duration(milliseconds: 350),
             gap: 8,
-            backgroundColor: Colors.black,
-            color: Colors.white,
+            backgroundColor: Colors.grey.shade300,
+            color: Colors.black,
+            hoverColor: Colors.grey.shade300,
             activeColor: Colors.white,
-            tabBackgroundColor: Colors.grey.shade800,
-            padding: EdgeInsets.all(16),
+            tabBackgroundColor: Colors.black,
+            padding: EdgeInsets.all(15),
             tabs: const [
               GButton(
                 icon: Icons.home,
@@ -74,14 +77,20 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ),
               GButton(
-                icon: Icons.settings,
-                text: 'Configuración',
+                icon: Icons.more_horiz,
+                text: 'Más',
                 textStyle: TextStyle(
                   fontWeight: FontWeight.normal,
                   color: Colors.white,
                 ),
                 ),
             ],
+            selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
           ),
         ),
       ),

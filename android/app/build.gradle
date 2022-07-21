@@ -53,6 +53,17 @@ android {
         versionName flutterVersionName
     }
 
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.infor.test"
+        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

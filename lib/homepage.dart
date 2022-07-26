@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:test/screens/home.dart';
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.all(15),
             tabs: const [
               GButton(
-                icon: Icons.home,
+                icon: CupertinoIcons.house_fill,
                 text: 'Inicio',
                 textStyle: TextStyle(
                   fontWeight: FontWeight.normal,
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ),
               GButton(
-                icon: Icons.map,
+                icon: CupertinoIcons.map_fill,
                 text: 'Mapa',
                 textStyle: TextStyle(
                   fontWeight: FontWeight.normal,
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ),
               GButton(
-                icon: Icons.notifications,
+                icon: CupertinoIcons.bell_fill,
                 text: 'Notificaciones',
                 textStyle: TextStyle(
                   fontWeight: FontWeight.normal,

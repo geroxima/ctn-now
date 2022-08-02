@@ -19,10 +19,11 @@ class _MapScreenState extends State<MapScreen> {
         children: [
           Expanded(
             child: Container(
-            ),)
+              child: FullMapPage(),
+            ),
+          )
         ],
       ),
     );
-    
   }
 }

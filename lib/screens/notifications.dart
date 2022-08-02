@@ -19,31 +19,38 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 50), 
+          SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Container(
-              height: 35,
-              child: Text('¿Que hay de nuevo?', 
-              style: GoogleFonts.roboto(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,),
+              child: Text(
+                '¿Que hay de nuevo?',
+                style: GoogleFonts.roboto(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           //details
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Container(child: Text(
-              "Aquí puedes ver los últimos avisos", 
-              style: GoogleFonts.roboto(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
+            child: Container(
+              child: Text(
+                "Aquí puedes ver los últimos avisos",
+                style: GoogleFonts.roboto(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            ),),
+            ),
           ),
-          SizedBox(height: 35,),
+          SizedBox(
+            height: 35,
+          ),
           //gato anim
           Center(
             child: Container(
@@ -57,19 +64,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             child: Center(
               child: Container(
                 height: 40,
-                child: Text('¡Shh! nada que ver por aquí', 
+                child: Text(
+                  '¡Shh! nada que ver por aquí',
                   style: GoogleFonts.roboto(
                     fontSize: 25,
                     color: Colors.grey.shade400,
-                    fontWeight: FontWeight.w500,),
+                    fontWeight: FontWeight.w500,
                   ),
+                ),
               ),
             ),
           )
         ],
       ),
-    );  
-
-    
+    );
   }
 }

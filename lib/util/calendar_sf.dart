@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:core';
 import 'dart:math';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:lottie/lottie.dart';
@@ -22,11 +21,9 @@ class GoogleSheetData extends StatefulWidget {
 
 class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
   MeetingDataSource? events;
-  final List<Color> _colorCollection = <Color>[];
 
   @override
   void initState() {
-    _initializeEventColor();
     super.initState();
   }
 
@@ -54,6 +51,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
                     allowViewNavigation: true,
                     showDatePickerButton: true,
                     viewNavigationMode: ViewNavigationMode.snap,
+                    initialSelectedDate: DateTime.now(),
                     timeSlotViewSettings: const TimeSlotViewSettings(
                       startHour: 7,
                       endHour: 19,
@@ -91,7 +89,6 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
                           height: 0,
                         )),
                     dataSource: MeetingDataSource(snapshot.data),
-                    initialDisplayDate: snapshot.data[0].from,
                   ),
                 );
               } else {
@@ -103,19 +100,6 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
     );
   }
 
-  void _initializeEventColor() {
-    _colorCollection.add(const Color(0xFF0F8644));
-    _colorCollection.add(const Color(0xFF8B1FA9));
-    _colorCollection.add(const Color(0xFFD20100));
-    _colorCollection.add(const Color(0xFFFC571D));
-    _colorCollection.add(const Color(0xFF36B37B));
-    _colorCollection.add(const Color(0xFF01A1EF));
-    _colorCollection.add(const Color(0xFF3D4FB5));
-    _colorCollection.add(const Color(0xFFE47C73));
-    _colorCollection.add(const Color(0xFF636363));
-    _colorCollection.add(const Color(0xFF0A8043));
-  }
-
   Future<List<Meeting>> getDataFromGoogleSheet() async {
     Response data = await http.get(
       Uri.parse(
@@ -124,7 +108,6 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
 
     dynamic jsonAppData = convert.jsonDecode(data.body);
     final List<Meeting> appointmentData = [];
-    final Random random = Random();
 
     for (dynamic data in jsonAppData) {
       var pog = data['byday'];
@@ -203,32 +186,27 @@ class Home extends StatelessWidget {
 }
 
 void calendarTapped(CalendarTapDetails details) {
-  if (details.targetElement == CalendarElement.appointment ||
-      details.targetElement == CalendarElement.agenda) {
-    final Meeting _meeting = details.appointments![0];
+  final Meeting _meeting = details.appointments![0];
 
-    var context;
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Container(child: new Text('Appointment details')),
-            content: Text(_meeting.eventName! +
-                "\nId: " +
-                _meeting.eventName.toString() +
-                "\nRecurrenceId: " +
-                _meeting.recurrenceRule.toString()),
-            actions: <Widget>[
-              new TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: new Text('close'))
-            ],
-          );
-        });
-  }
+  var context;
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Appointment details'),
+          content: Text(
+              "${_meeting.eventName!}\nId: ${_meeting.eventName}\nRecurrenceId: ${_meeting.recurrenceRule}"),
+          actions: <Widget>[
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('close'))
+          ],
+        );
+      });
 }
+
 
 // class MyCalendar extends StatefulWidget {
 //   const MyCalendar({Key? key}) : super(key: key);

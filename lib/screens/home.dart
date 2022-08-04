@@ -69,13 +69,11 @@ class HomeScreenState extends State<HomeScreen> {
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Container(
-              child: Text(
-                'Tu horario',
-                style: GoogleFonts.roboto(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
+            child: Text(
+              'Tu horario',
+              style: GoogleFonts.roboto(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),

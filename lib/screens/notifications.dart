@@ -22,13 +22,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Container(
-              child: Text(
-                '¿Que hay de nuevo?',
-                style: GoogleFonts.roboto(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
+            child: Text(
+              '¿Que hay de nuevo?',
+              style: GoogleFonts.roboto(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -38,13 +36,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           //details
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Container(
-              child: Text(
-                "Aquí puedes ver los últimos avisos",
-                style: GoogleFonts.roboto(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                ),
+            child: Text(
+              "Aquí puedes ver los últimos avisos",
+              style: GoogleFonts.roboto(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ),

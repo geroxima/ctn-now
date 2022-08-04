@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/gestures.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/util/models.dart';
@@ -9,19 +11,16 @@ class PreferenceService {
     await preferences.setInt('thisEspecialidad', settings.especialidad.index);
     await preferences.setInt('thisCurso', settings.curso.index);
 
-   print("Saved Settings"); 
-
+    print("Saved Settings");
   }
 
- Future <Settings> getSettings() async {
+  Future<Settings> getSettings() async {
     final preferences = await SharedPreferences.getInstance();
 
-    var especialidad = Especialidad.values[preferences.getInt('thisEspecialidad') ?? 0];
+    var especialidad =
+        Especialidad.values[preferences.getInt('thisEspecialidad') ?? 0];
     var curso = Curso.values[preferences.getInt('thisCurso') ?? 0];
-    
-    return Settings(
-      especialidad: especialidad, 
-      curso: curso);
-  }
 
+    return Settings(especialidad: especialidad, curso: curso);
+  }
 }

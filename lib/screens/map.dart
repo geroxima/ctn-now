@@ -16,11 +16,9 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: Column(
-        children: [
+        children: const [
           Expanded(
-            child: Container(
-              child: FullMapPage(),
-            ),
+            child: FullMapPage(),
           )
         ],
       ),

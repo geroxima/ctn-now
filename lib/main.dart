@@ -3,9 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:test/homepage.dart';
 import 'package:test/screens/home.dart';
+import 'package:test/services/notificationservice.dart';
 import 'package:test/util/theme_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging_web/firebase_messaging_web.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PushNotificationService.initializeApp();
   runApp(const MyApp());
 }
 

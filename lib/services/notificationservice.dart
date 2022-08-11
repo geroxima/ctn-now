@@ -27,6 +27,11 @@ class PushNotificationService {
     print('========================FCM TOKEN========================');
     print(token);
     print('========================FCM TOKEN========================');
+
+    //Handlers
+    FirebaseMessaging.onMessage.listen(_onMessageHandler);
+    FirebaseMessaging.onMessageOpenedApp.listen(_onMessageHandler);
+    FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
     // local notificaciones
   }
 }

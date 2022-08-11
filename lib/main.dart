@@ -6,7 +6,7 @@ import 'package:test/screens/home.dart';
 import 'package:test/services/notificationservice.dart';
 import 'package:test/util/theme_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging_web/firebase_messaging_web.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -14,7 +14,7 @@ import 'package:flutter/foundation.dart'
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
-/// 
+///
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
@@ -58,7 +58,10 @@ class DefaultFirebaseOptions {
     apiKey: 'AIzaSyB4wfNYpg5R-SdMPtAWmGHl74mXCiUItWQ',
     appId: '1:766052525116:android:45cba4e9073f1ebde18f39',
     messagingSenderId: '766052525116',
+    //509212190265 si el 76 no funca
     projectId: 'ctn01-845fe',
     storageBucket: 'ctn01-845fe.appspot.com',
+    androidClientId:
+        "766052525116-avcsojtp4olqi8arrkr0tkp6pamnmk81.apps.googleusercontent.com",
   );
 }

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'notification_details.dart';
 
 class MessageList extends StatefulWidget {
+  const MessageList({Key? key}) : super(key: key);
+
   @override
   State<MessageList> createState() => _MessageListState();
 }
@@ -37,11 +39,11 @@ class _MessageListState extends State<MessageList> {
           return ListTile(
             title: Text(
               message.notification?.title ?? "N/D",
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            trailing: Icon(
+            trailing: const Icon(
               Icons.notifications_active,
               color: Colors.red,
             ),

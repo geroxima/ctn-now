@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -5,12 +7,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:test/firebase_options.dart';
-import 'package:flutter/material.dart';
 import 'notification_details.dart';
 import 'notification_list.dart';
-import 'notification_list.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   print(
     'Handling a background message: ${message.messageId}',
@@ -28,7 +28,7 @@ Future<void> pogu() async {
           appId: '1:766052525116:android:45cba4e9073f1ebde18f39',
           messagingSenderId: '766052525116',
           projectId: 'ctn01-845fe'));
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   if (!kIsWeb) {
     channel = const AndroidNotificationChannel(
         'high_importance_channel', 'High Importance Notifications',
@@ -51,22 +51,22 @@ class MessagingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/': (context) => Application(),
-        '/message': (context) => MessageView(),
+        '/': (context) => const Application(),
+        '/message': (context) => const MessageView(),
       },
     );
   }
 }
 
 class Application extends StatefulWidget {
-  Application({Key? key}) : super(key: key);
+  const Application({Key? key}) : super(key: key);
 
   @override
-  State<Application> createState() => _ApplicationState();
+  State<Application> createState() => ApplicationState();
 }
 
-class _ApplicationState extends State<Application> {
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+class ApplicationState extends State<Application> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   void getToken() async {
     final token =
         _firebaseMessaging.getToken().then((value) => print('Token: $value'));
@@ -117,7 +117,7 @@ class _ApplicationState extends State<Application> {
       body: SingleChildScrollView(
           child: Column(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(16),
             child: Center(
               child: Text('Notification List'),

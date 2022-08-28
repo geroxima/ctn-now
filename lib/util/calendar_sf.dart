@@ -12,6 +12,18 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "calendar",
+      home: GoogleSheetData(),
+    );
+  }
+}
+
 class GoogleSheetData extends StatefulWidget {
   const GoogleSheetData({Key? key}) : super(key: key);
 
@@ -33,9 +45,9 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
       //Seleccion de idioma para el calendario
       localizationsDelegates: const [SfGlobalLocalizations.delegate],
       supportedLocales: const [
-        Locale('es'),
+        Locale('en'),
       ],
-      locale: const Locale('es'),
+      locale: const Locale('en'),
       debugShowCheckedModeBanner: false,
 
       home: Scaffold(
@@ -45,7 +57,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.data != null) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: SfCalendar(
                     view: CalendarView.schedule,
                     allowViewNavigation: true,
@@ -86,7 +98,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
                         appointmentItemHeight: 70,
                         hideEmptyScheduleWeek: true,
                         monthHeaderSettings: const MonthHeaderSettings(
-                          height: 0,
+                          height: 15,
                         )),
                     dataSource: MeetingDataSource(snapshot.data),
                   ),
@@ -110,21 +122,41 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
     final List<Meeting> appointmentData = [];
 
     for (dynamic data in jsonAppData) {
-      var pog = data['byday'];
+      var recurrence = data['byday'];
+
       Meeting meetingData = Meeting(
         eventName: data['subject'],
         from: _convertDateFromString(data['starttime']),
         to: _convertDateFromString(data['endtime']),
         background: Colors.grey.shade800,
-        recurrenceRule: 'FREQ=DAILY;INTERVAL=7;BYDAY:$pog;COUNT=10',
+        recurrenceRule: 'FREQ=DAILY;INTERVAL=7;BYDAY:$recurrence;COUNT=10',
       );
       appointmentData.add(meetingData);
+      String notes = data['notes'];
     }
     return appointmentData;
   }
 
   DateTime _convertDateFromString(String date) {
     return DateTime.parse(date);
+  }
+
+  void calendarTapped(CalendarTapDetails details) {
+    final Appointment meeting = details.appointments![0];
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(meeting.subject),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Cerrar'))
+            ],
+          );
+        });
   }
 }
 
@@ -157,22 +189,30 @@ class MeetingDataSource extends CalendarDataSource {
   String getRecurrenceRule(int index) {
     return appointments![index].recurrenceRule;
   }
+
+  @override
+  String getNotes(int index) {
+    return appointments![index].notes;
+  }
 }
 
 class Meeting {
-  Meeting(
-      {this.eventName = '',
-      required this.from,
-      required this.to,
-      this.recurrenceRule,
-      this.background,
-      this.isAllDay = false});
+  Meeting({
+    this.eventName = '',
+    required this.from,
+    required this.to,
+    this.recurrenceRule,
+    this.notes = '',
+    this.background,
+    this.isAllDay = false,
+  });
 
   String? eventName;
   DateTime? from;
   DateTime? to;
   String? recurrenceRule;
   Color? background;
+  String? notes;
   bool? isAllDay;
 }
 
@@ -184,29 +224,6 @@ class Home extends StatelessWidget {
         body: GoogleSheetData(),
       );
 }
-
-void calendarTapped(CalendarTapDetails details) {
-  final Meeting _meeting = details.appointments![0];
-
-  var context;
-  showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Appointment details'),
-          content: Text(
-              "${_meeting.eventName!}\nId: ${_meeting.eventName}\nRecurrenceId: ${_meeting.recurrenceRule}"),
-          actions: <Widget>[
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('close'))
-          ],
-        );
-      });
-}
-
 
 // class MyCalendar extends StatefulWidget {
 //   const MyCalendar({Key? key}) : super(key: key);

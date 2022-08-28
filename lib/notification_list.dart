@@ -44,7 +44,7 @@ class _MessageListState extends State<MessageList> {
               ),
             ),
             trailing: const Icon(
-              Icons.notifications_active,
+              Icons.notifications_rounded,
               color: Colors.red,
             ),
             onTap: () => Navigator.pushNamed(context, "/message",

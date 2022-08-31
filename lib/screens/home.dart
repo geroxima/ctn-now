@@ -19,11 +19,30 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       body: Column(
+        
         crossAxisAlignment: CrossAxisAlignment.start,
         // ignore: prefer_const_literals_to_create_immutables
         children: [
+          SafeArea(
+            child: Row(children: const [
+              Padding(
+                padding: EdgeInsets.only(left: 25),
+                child: Image(
+                    image: AssetImage('lib/icons/ctn_now.png'),
+                    width: 150,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: Image(
+                  image: AssetImage('lib/icons/ctn-logo.png'),
+                    width: 90,
+                  ),
+              ),
+            ]),
+          ),
           SizedBox(
-            height: 50,
+            height: 5,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -36,7 +55,7 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 5,
           ),
           //horarios/calendario
           Expanded(

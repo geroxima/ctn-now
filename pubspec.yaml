@@ -55,6 +55,18 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.2.8
+  flutter_launcher_icons: ^0.10.0
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: lib/asset/1x/splash.png
+
+flutter_icons:
+  android: true
+  image_path: "lib/asset/1x/ctnnowlogo.png"
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -70,6 +82,7 @@ flutter:
   assets:
     - lib/icons/
     - lib/anim/
+    - lib/asset/1x/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

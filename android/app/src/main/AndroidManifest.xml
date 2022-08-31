@@ -2,7 +2,7 @@
     package="com.ctn.test">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="test"
+        android:label="CTN now"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

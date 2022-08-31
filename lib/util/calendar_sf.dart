@@ -103,7 +103,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
   Future<List<Meeting>> getDataFromGoogleSheet() async {
     Response data = await http.get(
       Uri.parse(
-          "https://script.google.com/macros/s/AKfycbyDO1Pi422tOq_qg8b9qBmlDHDIIfG4bsvJI3gweamb77O_raFmkeS7vLdhk9dZwtd_/exec"),
+          "https://script.google.com/macros/s/AKfycbwsCnMZa1hF9Y2vTuwc1gXpl9ycQ0kQgyOVxbDzkia3JczZMtM5BNnyo9PMy_MBEiVF/exec"),
     );
     
     dynamic jsonAppData = convert.jsonDecode(data.body);

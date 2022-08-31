@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:test/screens/settings_screens/about_screen.dart';
 import 'package:test/screens/settings_screens/main_settings.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: GoogleFonts.roboto(
                 fontSize: 20,
                 fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
                 color: Colors.black,
               ),
               ),
@@ -51,6 +52,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Navigator.push(
                   context, 
                   MaterialPageRoute(builder: (context)=>const MainSettings()),
+                  );
+              },          
+              ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.only(left: 25.0),
+            child: ElevatedButton.icon(
+              icon: const Icon(
+                CupertinoIcons.info_circle,
+                color: Colors.black,),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(0),
+                shadowColor: Colors.transparent,
+                primary: Colors.transparent,
+              ),
+              label: Text('Acerca de',
+              style: GoogleFonts.roboto(
+                fontSize: 20,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
+              ),
+              ),
+              onPressed: (){
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context)=>const AboutScreen()),
                   );
               },          
               ),

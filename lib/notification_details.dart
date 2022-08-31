@@ -26,7 +26,7 @@ class MessageView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.black),
-        title: appbar(message.data.toString()),
+        title: appbar(notification?.title.toString()),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -42,14 +42,15 @@ class MessageView extends StatelessWidget {
                       img(notification.android!.imageUrl),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Text("Detalles de la notificación",
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              color: Colors.grey.shade500,
-                            ),
-                            textAlign: TextAlign.center,
-                            ),
+                        child: Text(
+                          "Detalles de la notificación",
+                          style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            color: Colors.grey.shade500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                       viewData(
                         "Título",
@@ -119,9 +120,6 @@ Widget appbar(String? value) {
   return Text(
     value ?? "N/A",
     style: GoogleFonts.roboto(
-      color: Colors.black,
-      fontSize: 16,
-      fontWeight: FontWeight.w600
-    ),
+        color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
   );
 }

@@ -103,9 +103,9 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
   Future<List<Meeting>> getDataFromGoogleSheet() async {
     Response data = await http.get(
       Uri.parse(
-          "https://script.google.com/macros/s/AKfycbyOLmP15JDq85RXzdvQ5W45LHRHYdvZqOuCE_3gHiKMI6yU2ab6C5K24F_s62otPBX4Cg/exec"),
+          "https://script.google.com/macros/s/AKfycbyDO1Pi422tOq_qg8b9qBmlDHDIIfG4bsvJI3gweamb77O_raFmkeS7vLdhk9dZwtd_/exec"),
     );
-
+    
     dynamic jsonAppData = convert.jsonDecode(data.body);
     final List<Meeting> appointmentData = [];
 
@@ -134,14 +134,23 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(meeting.subject),
+            title: Text(meeting.subject, 
+              style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 25, ),),
             content: Text(meeting.startTime.toString(), ),
+
             actions: <Widget>[
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Cerrar'))
+                  child: Text('Cerrar', 
+                    style: GoogleFonts.roboto(
+                      fontSize:  18,
+                      color: Colors.blue.shade500,
+                      fontWeight: FontWeight.w600, 
+                  ),))
             ],
           );
         });

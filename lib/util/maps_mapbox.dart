@@ -82,9 +82,10 @@ class FullMapState extends State<FullMap> {
           accessToken: MapsDemo.ACCESS_TOKEN,
           onMapCreated: _onMapCreated,
           initialCameraPosition: const CameraPosition(
+            bearing: 266,
             target: LatLng(-27.311822, -55.895227),
             zoom: 16.5,
-            tilt: 100,
+            tilt: 25,
           ),
           onStyleLoadedCallback: _onStyleLoadedCallback,
         ));

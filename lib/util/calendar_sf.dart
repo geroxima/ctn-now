@@ -12,18 +12,6 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "calendar",
-      home: GoogleSheetData(),
-    );
-  }
-}
-
 class GoogleSheetData extends StatefulWidget {
   const GoogleSheetData({Key? key}) : super(key: key);
 
@@ -45,9 +33,9 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
       //Seleccion de idioma para el calendario
       localizationsDelegates: const [SfGlobalLocalizations.delegate],
       supportedLocales: const [
-        Locale('en'),
+        Locale('es'),
       ],
-      locale: const Locale('en'),
+      locale: const Locale('es'),
       debugShowCheckedModeBanner: false,
 
       home: Scaffold(
@@ -98,7 +86,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
                         appointmentItemHeight: 70,
                         hideEmptyScheduleWeek: true,
                         monthHeaderSettings: const MonthHeaderSettings(
-                          height: 15,
+                          height: 0,
                         )),
                     dataSource: MeetingDataSource(snapshot.data),
                   ),
@@ -115,7 +103,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
   Future<List<Meeting>> getDataFromGoogleSheet() async {
     Response data = await http.get(
       Uri.parse(
-          "https://script.google.com/macros/s/AKfycbybaFrTEBrxTIni8izFKMQYNNAe7ciVMlqF0OUHyWujjRR2AQ8zDyQzh96tleRKMHSN/exec"),
+          "https://script.google.com/macros/s/AKfycbyOLmP15JDq85RXzdvQ5W45LHRHYdvZqOuCE_3gHiKMI6yU2ab6C5K24F_s62otPBX4Cg/exec"),
     );
 
     dynamic jsonAppData = convert.jsonDecode(data.body);
@@ -132,7 +120,6 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
         recurrenceRule: 'FREQ=DAILY;INTERVAL=7;BYDAY:$recurrence;COUNT=10',
       );
       appointmentData.add(meetingData);
-      String notes = data['notes'];
     }
     return appointmentData;
   }
@@ -148,7 +135,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(meeting.subject),
-            content: Text(meeting.notes.toString()),
+            content: Text(meeting.startTime.toString(), ),
             actions: <Widget>[
               TextButton(
                   onPressed: () {
@@ -190,11 +177,6 @@ class MeetingDataSource extends CalendarDataSource {
   String getRecurrenceRule(int index) {
     return appointments![index].recurrenceRule;
   }
-
-  @override
-  String getNotes(int index) {
-    return appointments![index].notes;
-  }
 }
 
 class Meeting {
@@ -203,7 +185,6 @@ class Meeting {
     required this.from,
     required this.to,
     this.recurrenceRule,
-    this.notes = '',
     this.background,
     this.isAllDay = false,
   });
@@ -212,8 +193,7 @@ class Meeting {
   DateTime? from;
   DateTime? to;
   String? recurrenceRule;
-  Color? background;
-  String? notes;
+  Color? background; 
   bool? isAllDay;
 }
 

@@ -25,48 +25,6 @@ class HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 50,
           ),
-
-          //search
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey[200],
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 1,
-                      blurRadius: 9,
-                      offset: Offset(0, 8),
-                    )
-                  ]),
-              child: TextField(
-                //accion del textfield
-
-                //decoracion del textfield
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Buscar...',
-                    hintStyle: GoogleFonts.roboto(
-                      fontWeight: FontWeight.w300,
-                      color: Colors.grey.shade600,
-                    ),
-                    icon: Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Image.asset(
-                        'lib/icons/search.png',
-                        height: 20,
-                        color: Colors.grey[600],
-                      ),
-                    )),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(
@@ -77,7 +35,6 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-
           SizedBox(
             height: 10,
           ),

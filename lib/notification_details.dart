@@ -1,5 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:test/util/calendar_sf.dart';
 import 'package:test/util/models.dart';
 
 class MessageArguments {
@@ -19,7 +21,11 @@ class MessageView extends StatelessWidget {
     RemoteNotification? notification = message.notification;
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.black),
         title: appbar(message.data.toString()),
       ),
       body: SingleChildScrollView(
@@ -34,20 +40,27 @@ class MessageView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       img(notification.android!.imageUrl),
-                      const Text("Notification Inf",
-                          style: TextStyle(
-                            fontSize: 18,
-                          )),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Text("Detalles de la notificación",
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              color: Colors.grey.shade500,
+                            ),
+                            textAlign: TextAlign.center,
+                            ),
+                      ),
                       viewData(
-                        "Title",
+                        "Título",
                         notification.title,
                       ),
                       viewData(
-                        "Body",
+                        "Cuerpo de texto",
                         notification.body,
                       ),
                       viewData(
-                        "Sent Time",
+                        "Fecha y Hora de envío",
                         message.sentTime?.toString(),
                       ),
                     ],
@@ -70,7 +83,7 @@ Widget viewData(String title, String? value) {
       children: [
         Text(
           "$title: ",
-          style: const TextStyle(
+          style: GoogleFonts.roboto(
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -84,16 +97,18 @@ Widget viewData(String title, String? value) {
 
 Widget img(String? value) {
   return Container(
-    padding: const EdgeInsets.all(8),
-    child: Card(
-      elevation: 4.0,
-      child: Center(
-        child: Image.network(
-          value ??
-              "https://cdn3.locable.com/uploads/resource/file/573989/Cats-at-Work.png",
-          height: 200,
-          width: 200,
-          fit: BoxFit.contain,
+    padding: const EdgeInsets.all(5),
+    child: InteractiveViewer(
+      child: Card(
+        elevation: 1,
+        child: Center(
+          child: Image.network(
+            value ??
+                "https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png",
+            height: 200,
+            width: 200,
+            fit: BoxFit.contain,
+          ),
         ),
       ),
     ),
@@ -103,8 +118,10 @@ Widget img(String? value) {
 Widget appbar(String? value) {
   return Text(
     value ?? "N/A",
-    style: const TextStyle(
+    style: GoogleFonts.roboto(
+      color: Colors.black,
       fontSize: 16,
+      fontWeight: FontWeight.w600
     ),
   );
 }

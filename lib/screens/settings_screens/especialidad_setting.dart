@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:test/screens/settings_screens/preferences_sevices.dart';
@@ -44,7 +45,9 @@ class EspecialiddadScreenState extends State<EspecialiddadScreen> {
           ),
         ),
         centerTitle: true,
-        iconTheme: const IconThemeData(size: 30, color: Colors.black),
+        leading: const Icon(CupertinoIcons.arrow_left, 
+          color: Colors.black, 
+          size: 35),
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),

@@ -115,7 +115,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
   Future<List<Meeting>> getDataFromGoogleSheet() async {
     Response data = await http.get(
       Uri.parse(
-          "https://script.google.com/macros/s/AKfycbyOLmP15JDq85RXzdvQ5W45LHRHYdvZqOuCE_3gHiKMI6yU2ab6C5K24F_s62otPBX4Cg/exec"),
+          "https://script.google.com/macros/s/AKfycbybaFrTEBrxTIni8izFKMQYNNAe7ciVMlqF0OUHyWujjRR2AQ8zDyQzh96tleRKMHSN/exec"),
     );
 
     dynamic jsonAppData = convert.jsonDecode(data.body);
@@ -148,6 +148,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(meeting.subject),
+            content: Text(meeting.notes.toString()),
             actions: <Widget>[
               TextButton(
                   onPressed: () {

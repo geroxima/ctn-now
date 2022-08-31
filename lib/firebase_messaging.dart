@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:test/firebase_options.dart';
 import 'notification_details.dart';
 import 'notification_list.dart';
@@ -46,6 +47,7 @@ Future<void> pogu() async {
 
 class MessagingScreen extends StatelessWidget {
   const MessagingScreen({Key? key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
@@ -114,18 +116,24 @@ class ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-          child: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(16),
-            child: Center(
-              child: Text('Notification List'),
+         appBar: AppBar(
+          title: Text(
+            "Notificaciones",
+            style: GoogleFonts.roboto(
+              fontSize: 30,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          MessageList(),
-        ],
-      )),
+          centerTitle: false,
+          iconTheme: const IconThemeData(size: 30, color: Colors.black),
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+        ),
+        backgroundColor: Colors.grey.shade300,
+        body: const SingleChildScrollView(
+          child: MessageList(),
+        ),
     );
   }
 }

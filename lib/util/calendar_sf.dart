@@ -56,7 +56,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
                       startHour: 7,
                       endHour: 19,
                     ),
-                    headerDateFormat: 'MMMM y',
+                    headerDateFormat: 'MMMM',
                     onTap: calendarTapped,
                     headerStyle: CalendarHeaderStyle(
                         textAlign: TextAlign.left,
@@ -70,24 +70,27 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
                       CalendarView.day,
                       CalendarView.month
                     ],
+                    appointmentTimeTextFormat: 'H:mm a',
                     todayHighlightColor: Colors.blue.shade500,
                     scheduleViewSettings: ScheduleViewSettings(
-                        dayHeaderSettings: DayHeaderSettings(
-                            dayTextStyle: GoogleFonts.roboto(
-                              fontSize: 20,
-                              color: Colors.grey.shade400,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            dateTextStyle: GoogleFonts.roboto(
-                              fontSize: 16,
-                              color: Colors.grey.shade400,
-                              fontWeight: FontWeight.w600,
-                            )),
-                        appointmentItemHeight: 70,
-                        hideEmptyScheduleWeek: true,
-                        monthHeaderSettings: const MonthHeaderSettings(
+                      dayHeaderSettings: DayHeaderSettings(
+                        dayTextStyle: GoogleFonts.roboto(
+                          fontSize: 20,
+                          color: Colors.grey.shade400,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      
+                      dateTextStyle: GoogleFonts.roboto(
+                        fontSize: 16,
+                        color: Colors.grey.shade400,
+                        fontWeight: FontWeight.w600,
+                      )),  
+                      appointmentItemHeight: 70,
+                      hideEmptyScheduleWeek: true,
+                      monthHeaderSettings: const MonthHeaderSettings(
                           height: 0,
                         )),
+                    
                     dataSource: MeetingDataSource(snapshot.data),
                   ),
                 );
@@ -103,7 +106,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
   Future<List<Meeting>> getDataFromGoogleSheet() async {
     Response data = await http.get(
       Uri.parse(
-          "https://script.google.com/macros/s/AKfycbwsCnMZa1hF9Y2vTuwc1gXpl9ycQ0kQgyOVxbDzkia3JczZMtM5BNnyo9PMy_MBEiVF/exec"),
+          "https://script.google.com/macros/s/AKfycbysR3YUNolVUqp-UthfCrbJErb_siTSZJf8-qW7uwm1V-84inOiqgRzzaMnmOSbl63B/exec"),
     );
     
     dynamic jsonAppData = convert.jsonDecode(data.body);
@@ -118,6 +121,8 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
         to: _convertDateFromString(data['endtime']),
         background: Colors.grey.shade800,
         recurrenceRule: 'FREQ=DAILY;INTERVAL=7;BYDAY:$recurrence;COUNT=10',
+        notes: data['notes'],
+        location: data['lecturetime'],
       );
       appointmentData.add(meetingData);
     }
@@ -134,17 +139,65 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(meeting.subject, 
-              style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 25, ),),
-            content: Text(meeting.startTime.toString(), ),
-
+            title: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text(meeting.subject, 
+                style: GoogleFonts.roboto( 
+                    fontWeight: FontWeight.w800,
+                    fontSize: 25, ),),
+            ),
+            content: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Container(
+                height: 120,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text("inicia: ", style: GoogleFonts.roboto(fontWeight: FontWeight.bold),),
+                        Text(meeting.startTime.hour.toString()),
+                        Text(":"),
+                        Text(meeting.startTime.minute.toString()),
+                        Text(" hs."),
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        Text("termina: ", style: GoogleFonts.roboto(fontWeight: FontWeight.bold),),
+                        Text(meeting.endTime.hour.toString()),
+                        Text(":"),
+                        Text(meeting.endTime.minute.toString()),
+                        Text(" hs."),
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        Text("horas cátedras: ", style: GoogleFonts.roboto(fontWeight: FontWeight.bold),),
+                        Text(meeting.location.toString()),
+                        Text("."),
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        Text("docente: ", style: GoogleFonts.roboto(fontWeight: FontWeight.bold),),
+                        Text(meeting.notes.toString()),
+                      ],
+                    ),
+                  ]
+                ),
+              ),
+            ),
             actions: <Widget>[
-              TextButton(
+              ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.lightBlue.shade50,
+                  ),
                   child: Text('Cerrar', 
                     style: GoogleFonts.roboto(
                       fontSize:  18,
@@ -186,6 +239,17 @@ class MeetingDataSource extends CalendarDataSource {
   String getRecurrenceRule(int index) {
     return appointments![index].recurrenceRule;
   }
+
+  @override
+  String getNotes(int index) {
+    return appointments![index].notes;
+  }
+
+  @override
+  String getLocation(int index) {
+    return appointments![index].location;
+  }
+
 }
 
 class Meeting {
@@ -196,6 +260,8 @@ class Meeting {
     this.recurrenceRule,
     this.background,
     this.isAllDay = false,
+    this.notes = '',
+    this.location = '',
   });
 
   String? eventName;
@@ -204,6 +270,8 @@ class Meeting {
   String? recurrenceRule;
   Color? background; 
   bool? isAllDay;
+  String? notes;
+  String? location;
 }
 
 class Home extends StatelessWidget {

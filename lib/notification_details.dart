@@ -25,8 +25,16 @@ class MessageView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: appbar(notification?.title.toString()),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.black, size: 30),
+        title: Text(
+          'Detalles de la notificación',
+          style: GoogleFonts.roboto(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -39,31 +47,52 @@ class MessageView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      img(notification.android!.imageUrl),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: Text(
-                          "Detalles de la notificación",
+                          notification.title.toString(),
                           style: GoogleFonts.roboto(
                             fontWeight: FontWeight.bold,
-                            fontSize: 25,
+                            fontStyle: FontStyle.italic,
                             color: Colors.grey.shade500,
+                            fontSize: 22,
                           ),
-                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              message.sentTime!.day.toString(),
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                color: Colors.grey.shade500,
+                              ),
+                            ),
+                            Text(" de " ,  ),
+                            Text(message.sentTime!.month.toString(), style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                color: Colors.grey.shade500,),
+                            Text(" del "),
+                            Text(message.sentTime!.year.toString()),
+                            Text(", a las "),
+                            Text(
+                              message.sentTime!.hour.toString(),
+                            ),
+                            Text(":"),
+                            Text(message.sentTime!.minute.toString()),
+                            Text(" hs."),
+                          ],
                         ),
                       ),
                       viewData(
-                        "Título",
-                        notification.title,
+                        "",
+                        notification.body.toString(),
                       ),
-                      viewData(
-                        "Cuerpo de texto",
-                        notification.body,
-                      ),
-                      viewData(
-                        "Fecha y Hora de envío",
-                        message.sentTime?.toString(),
-                      ),
+                      img(notification.android!.imageUrl),
                     ],
                   ),
                 ),

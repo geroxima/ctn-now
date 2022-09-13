@@ -73,24 +73,22 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
                     appointmentTimeTextFormat: 'H:mm a',
                     todayHighlightColor: Colors.blue.shade500,
                     scheduleViewSettings: ScheduleViewSettings(
-                      dayHeaderSettings: DayHeaderSettings(
-                        dayTextStyle: GoogleFonts.roboto(
-                          fontSize: 20,
-                          color: Colors.grey.shade400,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      
-                      dateTextStyle: GoogleFonts.roboto(
-                        fontSize: 16,
-                        color: Colors.grey.shade400,
-                        fontWeight: FontWeight.w600,
-                      )),  
-                      appointmentItemHeight: 70,
-                      hideEmptyScheduleWeek: true,
-                      monthHeaderSettings: const MonthHeaderSettings(
+                        dayHeaderSettings: DayHeaderSettings(
+                            dayTextStyle: GoogleFonts.roboto(
+                              fontSize: 20,
+                              color: Colors.grey.shade400,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            dateTextStyle: GoogleFonts.roboto(
+                              fontSize: 16,
+                              color: Colors.grey.shade400,
+                              fontWeight: FontWeight.w600,
+                            )),
+                        appointmentItemHeight: 70,
+                        hideEmptyScheduleWeek: true,
+                        monthHeaderSettings: const MonthHeaderSettings(
                           height: 0,
                         )),
-                    
                     dataSource: MeetingDataSource(snapshot.data),
                   ),
                 );
@@ -108,7 +106,7 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
       Uri.parse(
           "https://script.google.com/macros/s/AKfycbysR3YUNolVUqp-UthfCrbJErb_siTSZJf8-qW7uwm1V-84inOiqgRzzaMnmOSbl63B/exec"),
     );
-    
+
     dynamic jsonAppData = convert.jsonDecode(data.body);
     final List<Meeting> appointmentData = [];
 
@@ -141,53 +139,72 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
           return AlertDialog(
             title: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(meeting.subject, 
-                style: GoogleFonts.roboto( 
-                    fontWeight: FontWeight.w800,
-                    fontSize: 25, ),),
+              child: Text(
+                meeting.subject,
+                style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 25,
+                ),
+              ),
             ),
             content: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Container(
                 height: 120,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("inicia: ", style: GoogleFonts.roboto(fontWeight: FontWeight.bold),),
-                        Text(meeting.startTime.hour.toString()),
-                        Text(":"),
-                        Text(meeting.startTime.minute.toString()),
-                        Text(" hs."),
-                      ],
-                    ),
-                    const SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        Text("termina: ", style: GoogleFonts.roboto(fontWeight: FontWeight.bold),),
-                        Text(meeting.endTime.hour.toString()),
-                        Text(":"),
-                        Text(meeting.endTime.minute.toString()),
-                        Text(" hs."),
-                      ],
-                    ),
-                    const SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        Text("horas cátedras: ", style: GoogleFonts.roboto(fontWeight: FontWeight.bold),),
-                        Text(meeting.location.toString()),
-                        Text("."),
-                      ],
-                    ),
-                    const SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        Text("docente: ", style: GoogleFonts.roboto(fontWeight: FontWeight.bold),),
-                        Text(meeting.notes.toString()),
-                      ],
-                    ),
-                  ]
-                ),
+                child: Column(children: [
+                  Row(
+                    children: [
+                      Text(
+                        "inicia: ",
+                        style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                      ),
+                      Text(meeting.startTime.hour.toString()),
+                      Text(":"),
+                      Text(meeting.startTime.minute.toString()),
+                      Text(" hs."),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "termina: ",
+                        style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                      ),
+                      Text(meeting.endTime.hour.toString()),
+                      Text(":"),
+                      Text(meeting.endTime.minute.toString()),
+                      Text(" hs."),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "horas cátedras: ",
+                        style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                      ),
+                      Text(meeting.location.toString()),
+                      Text("."),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "docente: ",
+                        style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                      ),
+                      Text(meeting.notes.toString()),
+                    ],
+                  ),
+                ]),
               ),
             ),
             actions: <Widget>[
@@ -198,12 +215,14 @@ class LoadDataFromGoogleSheetState extends State<GoogleSheetData> {
                   style: ElevatedButton.styleFrom(
                     primary: Colors.lightBlue.shade50,
                   ),
-                  child: Text('Cerrar', 
+                  child: Text(
+                    'Cerrar',
                     style: GoogleFonts.roboto(
-                      fontSize:  18,
+                      fontSize: 18,
                       color: Colors.blue.shade500,
-                      fontWeight: FontWeight.w600, 
-                  ),))
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ))
             ],
           );
         });
@@ -249,7 +268,6 @@ class MeetingDataSource extends CalendarDataSource {
   String getLocation(int index) {
     return appointments![index].location;
   }
-
 }
 
 class Meeting {
@@ -268,7 +286,7 @@ class Meeting {
   DateTime? from;
   DateTime? to;
   String? recurrenceRule;
-  Color? background; 
+  Color? background;
   bool? isAllDay;
   String? notes;
   String? location;

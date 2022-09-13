@@ -45,9 +45,10 @@ class EspecialiddadScreenState extends State<EspecialiddadScreen> {
           ),
         ),
         centerTitle: true,
-        leading: const Icon(CupertinoIcons.arrow_left, 
-          color: Colors.black, 
-          size: 35),
+        iconTheme: IconThemeData(
+          size: 30,
+          color: Colors.black,
+        ),
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),

@@ -58,36 +58,27 @@ class FullMapState extends State<FullMap> {
   }
 
   _onStyleLoadedCallback() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: const Text("Style loaded :)"),
-      backgroundColor: Theme.of(context).primaryColor,
-      duration: const Duration(seconds: 0),
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text("Mapa Listo! :)"),
+      backgroundColor: Colors.black,
+      duration: Duration(seconds: 0),
     ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: FloatingActionButton(
-            child: const Icon(Icons.swap_horiz),
-            onPressed: () => setState(
-              () => isLight = !isLight,
-            ),
-          ),
-        ),
         body: MapboxMap(
-          styleString: "mapbox://styles/gerooo00/cl3xco6zz001214mg7qo8um0u",
-          accessToken: MapsDemo.ACCESS_TOKEN,
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: const CameraPosition(
-            bearing: 266,
-            target: LatLng(-27.311822, -55.895227),
-            zoom: 16.5,
-            tilt: 25,
-          ),
-          onStyleLoadedCallback: _onStyleLoadedCallback,
-        ));
+      styleString: "mapbox://styles/gerooo00/cl3xco6zz001214mg7qo8um0u",
+      accessToken: MapsDemo.ACCESS_TOKEN,
+      onMapCreated: _onMapCreated,
+      initialCameraPosition: const CameraPosition(
+        bearing: 266,
+        target: LatLng(-27.311822, -55.895227),
+        zoom: 16.5,
+        tilt: 25,
+      ),
+      onStyleLoadedCallback: _onStyleLoadedCallback,
+    ));
   }
 }

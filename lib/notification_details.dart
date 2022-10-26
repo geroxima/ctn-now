@@ -36,68 +36,70 @@ class MessageView extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            children: [
-              if (notification != null) ...[
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Text(
-                          notification.title.toString(),
-                          style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.italic,
-                            color: Colors.grey.shade500,
-                            fontSize: 22,
+      body: Hero(
+        tag: 'animation${message.data}',
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              children: [
+                if (notification != null) ...[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Text(
+                            notification.title.toString(),
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.grey.shade500,
+                              fontSize: 22,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              message.sentTime!.day.toString(),
-                              style: GoogleFonts.roboto(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                                color: Colors.grey.shade500,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                message.sentTime!.day.toString(),
+                                style: GoogleFonts.roboto(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  color: Colors.grey.shade500,
+                                ),
                               ),
-                            ),
-                            Text(" de " ,  ),
-                            Text(message.sentTime!.month.toString(), style: GoogleFonts.roboto(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                                color: Colors.grey.shade500,),
-                            Text(" del "),
-                            Text(message.sentTime!.year.toString()),
-                            Text(", a las "),
-                            Text(
-                              message.sentTime!.hour.toString(),
-                            ),
-                            Text(":"),
-                            Text(message.sentTime!.minute.toString()),
-                            Text(" hs."),
-                          ],
+                              const Text(
+                                " de ",
+                              ),
+                              Text(message.sentTime!.month.toString()),
+                              const Text(" del "),
+                              Text(message.sentTime!.year.toString()),
+                              const Text(", a las "),
+                              Text(
+                                message.sentTime!.hour.toString(),
+                              ),
+                              const Text(":"),
+                              Text(message.sentTime!.minute.toString()),
+                              const Text(" hs."),
+                            ],
+                          ),
                         ),
-                      ),
-                      viewData(
-                        "",
-                        notification.body.toString(),
-                      ),
-                      img(notification.android!.imageUrl),
-                    ],
+                        viewData(
+                          "",
+                          notification.body.toString(),
+                        ),
+                        img(notification.android!.imageUrl),
+                      ],
+                    ),
                   ),
-                ),
-              ]
-            ],
+                ]
+              ],
+            ),
           ),
         ),
       ),

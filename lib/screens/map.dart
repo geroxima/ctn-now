@@ -17,6 +17,12 @@ class _MapScreenState extends State<MapScreen> {
       backgroundColor: Colors.grey.shade300,
       body: Column(
         children: const [
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+              child: TextField(),
+            ),
+          ),
           Expanded(
             child: FullMapPage(),
           )

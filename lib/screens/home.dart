@@ -1,10 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
-
-import '../util/calendar_sf.dart';
+import '../util/classes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,7 +16,6 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       body: Column(
-        
         crossAxisAlignment: CrossAxisAlignment.start,
         // ignore: prefer_const_literals_to_create_immutables
         children: [
@@ -28,16 +24,16 @@ class HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: EdgeInsets.only(left: 25),
                 child: Image(
-                    image: AssetImage('lib/icons/ctn_now.png'),
-                    width: 150,
+                  image: AssetImage('lib/icons/ctn_now.png'),
+                  width: 150,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Image(
                   image: AssetImage('lib/icons/ctn-logo.png'),
-                    width: 90,
-                  ),
+                  width: 90,
+                ),
               ),
             ]),
           ),

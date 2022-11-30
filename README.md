@@ -5,6 +5,16 @@ Tiene como finalidad la optimizacion de tiempo en los alumnos durante sus días 
 - 📅 Una agenda digital donde los alumnos puedan ver su horario de clases dependiendo de su especialidad, curso y sección; El cual se actualiza de forma dinámica dependiendo de los cambios del horario.
 - 📍 Un mapa interactivo de las instalaciones del colegio en donde pueden ver todos sus edificios y oficinas para comprender mejor como desplazarse por este. El mapa también comprende los alrededores del colegio.
 - 🔔 Un sistema de notificaciones el cual es utilizado como un canal de mensajes directo entre el colegio y los alumnos, en pos de evitar la desinformación y la utilización de servicios de terceros tales como WhatsApp Menssenger. [^3]
+## Funciones out of the box y por añadir
+- [x] Agenda digital 
+- [ ] Agenda digital offline
+- [x] Mapa del colegio con sus instalaciones
+- [ ] Sistema de búsqueda de mapa
+- [x] Servicio de notificaciones
+- [ ] Seleccionar especialidad, curso y sección
+- [x] Soporte para Android
+- [ ] Soporte para iOS
+
 
 <h3 align="center">Pantallas de la app en android</h3>
 <h4 align="center"><i>Agenda de horarios y sus modos de vista</i></h4>
